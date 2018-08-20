@@ -1,6 +1,7 @@
 import googlemaps
 from datetime import datetime
 
+
 gmaps = googlemaps.Client(key='AIzaSyDvBkR_3IQDGHxd-iBNP-obx9ncD8PMdaM')
 
 # Geocoding an address
@@ -16,5 +17,14 @@ directions_result = gmaps.directions("Sydney Town Hall",
                                      mode="transit",
                                      departure_time=now)
 
+places = googlemaps.places
+
+location = (37.419793, -121.900285)
+radius = 2000
+
+restaurants = places.places(gmaps, "restaurant", location=location, radius=radius, open_now=True)
+
+import pprint
+pprint.pprint(restaurants)
 #print(directions_result)
 
