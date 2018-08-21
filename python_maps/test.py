@@ -4,6 +4,7 @@ import pprint
 from gmplot import gmplot
 
 
+
 gmaps = googlemaps.Client(key='AIzaSyDvBkR_3IQDGHxd-iBNP-obx9ncD8PMdaM')
 
 # Geocoding an address
