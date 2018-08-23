@@ -15,16 +15,11 @@ def student():
 @app.route('/result/<subpath>', methods = ['GET', 'POST'])
 def result(subpath):
     if request.method == 'POST':
-        print(subpath)
         lat = float(str(subpath).split("^")[0])
         lon = float(str(subpath).split("^")[1])
-        #print("mam")
-        #result = request.form['location_long_lat']
-        #print((lat, long))
         draw_map((lat, lon))
-        #return render_template('my_map.html')
+        #student()
         return subpath
-    print("aaa")
     return "get"
 
 def draw_map(location):
