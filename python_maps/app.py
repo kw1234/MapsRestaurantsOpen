@@ -12,26 +12,33 @@ places = googlemaps.places
 def student():
     return render_template('my_map.html')
 
-@app.route('/result',methods = ['POST', 'GET'])
-def result():
+@app.route('/result/<subpath>', methods = ['GET', 'POST'])
+def result(subpath):
     if request.method == 'POST':
-        result = request.form['location_long_lat']
-        print(result)
-        draw_map(result)
-        return render_template('my_map.html')
+        print(subpath)
+        lat = float(str(subpath).split("^")[0])
+        lon = float(str(subpath).split("^")[1])
+        #print("mam")
+        #result = request.form['location_long_lat']
+        #print((lat, long))
+        draw_map((lat, lon))
+        #return render_template('my_map.html')
+        return subpath
     print("aaa")
     return "get"
 
 def draw_map(location):
-    print("aaaa")
+    print(location)
     radius = 2000
     restaurants = places.places(gmaps, "restaurant", location=location, radius=radius, open_now=True)['results']
     info_list = [[restaurant['geometry']['location'], restaurant['name']] for restaurant in restaurants if restaurant['opening_hours']['open_now']]
     map_draw = gmplot.GoogleMapPlotter(location[0], location[1], 13)
     for info in info_list:
+        print(info)
         map_draw.marker(info[0]['lat'], info[0]['lng'], 'cornflowerblue')
         
     map_draw.draw("templates/my_map.html")
+    map_draw.draw("my_map.html")
 
 
 if __name__ == '__main__':
