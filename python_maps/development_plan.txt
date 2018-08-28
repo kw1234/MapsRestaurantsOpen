@@ -1,0 +1,18 @@
+Current State:
+- Have latitude and longitude text boxes, can fill those and press submit, and the restaurants open within (hardcoded value) 2000m radius
+  will have markers at them
+
+
+To Do:
+- Add address functionality
+- Add text box for the radius -> done
+- Add more metadata per each marker (type of food, price range)
+- Display all the metadata on each marker in a basic way
+- Access the user's location, draw markers based on this
+- Add functionality to drop a pin and get the markers based on this
+
+- Get more than 20 results to show up -> below is an example url I used where the next_page_token was used
+
+https://maps.googleapis.com/maps/api/place/textsearch/json?location=37.7749%2C-122.4194&maxprice=None&minprice=None&opennow=true&query=restaurant&radius=2000&key=AIzaSyDvBkR_3IQDGHxd-iBNP-obx9ncD8PMdaM&pagetoken=CrQCKgEAADjFjkaPdX-CZGtffgGKqgda--hof_WIWM3lwnlrLENngmcQ6GzDNgVTpmlhWJiBdXrdz_Xph5pLLY4s3YvK8v-tudoKmC1GSlrJRqEQuWM2AoJS193Kbfo05j7YVPzQCRHbzPD02lIQE7kJkW1DHdxnEWr_crb9OvSdoXqpSrp5A6X8r06VVSm2uNgyFsHHpjG5XjifkTE6jFnAKvveTUrCZdczSm2PVStNLO15PxSnALxiaYMtY9ZfGGRCYFk0rAS-50UqIcyRLxpDh9KkIpKZBv99mwtZbBAe1QYvKKxmwmV57Mw2pB6XjZrOUi5457x6-JWR7dELZFCsVd5zj9z1JZNRHZobQor4273-f_HfrGUiSsFxS_yRj1jrSScLdf1dEQJOszFr0r5zzTIWXqkSEH_iCsWNMKLuLMP1XUq-HCkaFKR4g0hBrCR3eaQT3hj41MzwAmZs
+
+- General Error Handling
