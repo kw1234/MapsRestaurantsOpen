@@ -194,21 +194,50 @@ class GoogleMapPlotter(object):
         self.write_heatmap(f)
         f.write('\t}\n')
 
-        # Added by ME
+        # ADDED BY ME
         f.write('</script>\n')
         f.write('<script type="text/javascript">')
         f.write('function myFunction(){\n')
-        f.write('var name = document.getElementById("lastname").value;\n')
-        f.write('console.log(name);\n')
+        f.write('var lat = document.getElementById("lat").value;\n')
+        f.write('var lon = document.getElementById("lon").value;\n')
+        f.write('console.log(lat + "," + lon);\n')
         f.write('var xhttp = new XMLHttpRequest();\n')
         f.write('    xhttp.onreadystatechange = function() {\n')
         f.write('        if (this.readyState == 4 && this.status == 200) {\n')
         f.write('            //alert(this.responseText);\n')
         f.write('        }\n')
         f.write('    };\n')
-        f.write('xhttp.open("POST", "/result/"+name, true);\n')
+        f.write('xhttp.open("POST", "/latlon/"+lat+"^"+lon, true);\n')
         f.write('xhttp.setRequestHeader("Content-type", "application/json");\n')
-        f.write('xhttp.send(name);\n');
+        f.write('xhttp.send(lat+"^"+lon);\n');
+        f.write('location.reload(true);')
+        f.write('};\n')
+        f.write('function radiusFunction(){\n')
+        f.write('var radius = document.getElementById("radius").value;\n')
+        f.write('console.log(radius);\n')
+        f.write('var xhttp = new XMLHttpRequest();\n')
+        f.write('    xhttp.onreadystatechange = function() {\n')
+        f.write('        if (this.readyState == 4 && this.status == 200) {\n')
+        f.write('            //alert(this.responseText);\n')
+        f.write('        }\n')
+        f.write('    };\n')
+        f.write('xhttp.open("POST", "/latlon/radius/"+radius, true);\n')
+        f.write('xhttp.setRequestHeader("Content-type", "application/json");\n')
+        f.write('xhttp.send(radius);\n');
+        f.write('location.reload(true);')
+        f.write('};\n')
+        f.write('function addressFunction(){\n')
+        f.write('var address = document.getElementById("address").value;\n')
+        f.write('console.log(radius);\n')
+        f.write('var xhttp = new XMLHttpRequest();\n')
+        f.write('    xhttp.onreadystatechange = function() {\n')
+        f.write('        if (this.readyState == 4 && this.status == 200) {\n')
+        f.write('            //alert(this.responseText);\n')
+        f.write('        }\n')
+        f.write('    };\n')
+        f.write('xhttp.open("POST", "/address/"+address, true);\n')
+        f.write('xhttp.setRequestHeader("Content-type", "application/json");\n')
+        f.write('xhttp.send(address);\n');
         f.write('location.reload(true);')
         f.write('};\n')
         f.write('</script>\n')
@@ -221,10 +250,15 @@ class GoogleMapPlotter(object):
             '<body style="margin:0px; padding:0px;" onload="initialize()">\n')
 
 
-        # Added by ME
+        # ADDED BY ME
         f.write(
-            '\t<div><form id="myForm" action = "/result/" method = "post">')
-        f.write('Last name:<br><input type="text" id="lastname"><input type="button" onclick="myFunction()" value="Submit"></form>')
+            '\t<div><form id="myForm" method = "post">')
+        f.write('Latitude: <input type="text" id="lat"> Longitude: <input type="text" id="lon">\n')
+        f.write('<input type="button" onclick="myFunction()" value="Submit"></form><br>')
+        f.write(' Radius: <input type="text" id="radius">\n')
+        f.write('<input type="button" onclick="radiusFunction()" value="Submit"></form>')
+        f.write(' Address: <input type="text" id="address">\n')
+        f.write('<input type="button" onclick="addressFunction()" value="Submit"></form>')
         f.write('</div>\n')
 
 
@@ -311,11 +345,12 @@ class GoogleMapPlotter(object):
         f.write('\n')
 
     def write_point(self, f, lat, lon, color, title):
-        print(f)
-        print(lat, lon)
-        print(color)
-        print(self.coloricon)
-        print(title)
+        # ADDED BY ME
+        #print(f)
+        #print(lat, lon)
+        #print(color)
+        #print(self.coloricon)
+        #print(title)
         f.write('\t\tvar latlng = new google.maps.LatLng(%f, %f);\n' %
                 (lat, lon))
         #f.write('\t\tvar img = new google.maps.MarkerImage(\'%s\');\n' %
